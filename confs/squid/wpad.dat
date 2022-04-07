@@ -1,0 +1,32 @@
+
+function FindProxyForURL(url, host) {
+	
+	// No proxy for hosts with local domain
+	// you ca replace this with your local domain
+ 	// if (shExpMatch(host, ".foo.bar")) return "DIRECT";
+
+	// No proxy for internal networks or VPN.
+	if (isPlainHostName(host) ||
+	isInNet(myIpAddress(), "172.16.7.0",  "255.255.255.0") ||
+	isInNet(dnsResolve(host), "192.168.0.0",  "255.255.255.0") ||
+	isInNet(dnsResolve(host), "172.16.0.0",  "255.255.0.0") ||
+	isInNet(dnsResolve(host), "10.0.0.0",  "255.0.0.0")
+		return "DIRECT";
+
+	// Proxy definied to IPs to the local network
+	if (isInNet(myIpAddress(),"192.168.0.0","255.255.252.0"))
+		return "PROXY 192.168.0.1:3128";
+
+	// Proxy definied to IPs to the local network
+	if (isInNet(myIpAddress(),"172.16.0.0","255.255.252.0"))
+		return "PROXY 172.16.0.1:3128";
+
+	// Proxy definied to IPs to the local network
+	if (isInNet(myIpAddress(),"10.0.0.0","255.255.252.0"))
+		return "PROXY 10.0.0.1:3128";
+
+	// definition default
+	//	return "PROXY 172.16.0.1:3128";
+		return "DIRECT";
+
+}

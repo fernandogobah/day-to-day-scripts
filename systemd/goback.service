@@ -1,0 +1,19 @@
+#!/bin/bash
+# Author: Fernando Lima
+# E-mail: fernandogobah@gmail.com
+# Last Update: 2022-04-07
+# Desc: Daemon of the systemd to Gobah! Backup Client
+
+
+[Unit]
+Description=Gobah! Backup Client
+After=network.target
+
+[Service]
+Type=simple
+RemainAfterExit=true
+User=root
+ExecStart=/opt/GO!BACK/backup-daemon-start.sh
+
+[Install]
+WantedBy=multi-user.target

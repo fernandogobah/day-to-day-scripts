@@ -1,0 +1,36 @@
+#!/bin/bash
+# Author: Fernando Lima
+# E-mail: fernandogobah@gmail.com
+# Last Update: 2022-04-07
+# Desc: Daemon of systemd to mount cloud provider as filesystem via rclone
+
+[Unit]
+Description=Description Service
+#AssertPathIsDirectory=mount_point_target
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone mount \
+        --config=/root/.config/rclone/rclone.conf \
+        --allow-other \
+        --cache-tmp-upload-path=/tmp/rclone/upload \
+        --cache-chunk-path=/tmp/rclone/chunks \
+        --cache-workers=8 \
+        --vfs-cache-mode full \
+        --cache-dir=/tmp/rclone/vfs \
+        --cache-db-path=/tmp/rclone/db \
+        --no-modtime \
+        --drive-use-trash \
+        --stats=0 \
+        --checkers=16 \
+        --bwlimit=40M \
+        --dir-cache-time=60m \
+	--cache-info-age=60m namepoint:path_is_here mount_point_target
+ExecStop=/usr/bin/fusermount -u mount_point_target
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,26 @@
+RC.LOCAL
+
+#start dspix                                                     
+@sleep 30                                                        
+@chromium-browser --kiosk --incognito --disable-session-crashed-b
+ubble --check-for-update-interval=604800 https://URL_to_presenter/
+?r=28357A57616E586B745E5E6076448092            
+                                                                 
+#disable sleep monitor                                           
+@xset s noblank                                                  
+@xset s off                                                      
+@xset -dpms       
+
+
+
+
+
+
+
+
+CRONTAB
+
+50 07 * * * sudo reboot        
+30 07 * * * echo 'on 0' | cec-client -s                          
+00 18 * * * echo 'standby 0' | cec-client -s                     
+

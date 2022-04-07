@@ -1,0 +1,19 @@
+#!/bin/bash
+# Author: Fernando Lima
+# E-mail: fernandogobah@gmail.com
+# Last Update: 2022-04-07
+# Desc: Daemon of systemd to ZFS auto load encryption key
+
+[Unit]
+Description=Load encryption keys
+DefaultDependencies=no
+After=zfs-import.target
+Before=zfs-mount.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/zfs load-key -L file:///root/.zfs-pool-bacula.key rpool/ROOT/bacula
+
+[Install]
+WantedBy=zfs-mount.service

@@ -1,0 +1,22 @@
+function FindProxyForURL(url, host){
+   var host_ip;
+ 
+   host_ip= dnsResolve(host);
+   if (isInNet(host_ip, "127.0.0.1", "255.255.255.255"))
+      return "DIRECT";
+   if (isInNet(host_ip, "172.16.0.0", "255.255.255.0"))
+      return "DIRECT";
+   if (isInNet(host_ip, "192.168.0.0", "255.255.0.0"))
+      return "DIRECT";
+   if (isInNet(host_ip, "10.0.0.0", "255.0.0.0"))
+      return "DIRECT";
+   if (isInNet(myIpAddress(), "172.16.0.0", "255.255.255.0"))
+      return "PROXY 172.16.0.1:3128";
+   if (isInNet(myIpAddress(), "192.160.0.0", "255.255.0.0"))
+      return "PROXY 192.160.0.1:3128";
+   if (isInNet(myIpAddress(), "10.0.0.0", "255.0.0.0"))
+      return "PROXY 10.0.0.1:3128";
+
+   else
+      return "DIRECT";
+}

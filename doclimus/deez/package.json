@@ -1,0 +1,28 @@
+{
+  "name": "deeznode",
+  "version": "1.0.0",
+  "main": "deez.js",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "browser-id3-writer": "^3.0.3",
+    "crypto": "0.0.3",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node deez.js http://www.deezer.com/track/7435007"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex2844/deez.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alex2844/deez/issues"
+  },
+  "homepage": "https://github.com/alex2844/deez#readme",
+  "description": ""
+}
